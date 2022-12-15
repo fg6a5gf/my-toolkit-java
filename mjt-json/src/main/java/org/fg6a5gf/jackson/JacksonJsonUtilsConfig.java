@@ -5,15 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fg6a5gf.core.JsonUtils;
 
 /**
- * ConfigJackson
+ * JacksonJsonUtilsConfig
  *
  * @author zhengxx
  * @since 2022/12/07
  */
-public class ConfigJackson {
+public class JacksonJsonUtilsConfig {
 
     public void config(ObjectMapper objectMapper) {
-        ObjectMapperUtils mapperUtils = new ObjectMapperUtils(objectMapper);
+        JacksonJsonUtils mapperUtils = new JacksonJsonUtils(objectMapper);
         if (!JsonUtils.Config.configEncoder(mapperUtils)) {
             throw new ObjectMapperConfigException("encoder已经配置过，不能重新配置");
         }

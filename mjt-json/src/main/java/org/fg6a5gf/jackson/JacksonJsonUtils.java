@@ -12,16 +12,16 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 /**
- * ObjectMapperUtils
+ * JacksonJsonUtils
  *
  * @author zhengxx
  * @since 2022/12/07
  */
-public class ObjectMapperUtils implements JsonEncoder, JsonDecoder {
+public class JacksonJsonUtils implements JsonEncoder, JsonDecoder {
 
     private final ObjectMapper objectMapper;
 
-    public ObjectMapperUtils(ObjectMapper objectMapper) {
+    public JacksonJsonUtils(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 

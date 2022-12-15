@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     api(project(":mjt-json"))
-    implementation('com.fasterxml.jackson.core:jackson-databind:2.14.0')
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
     implementation 'org.springframework.boot:spring-boot-autoconfigure:2.7.6'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
