@@ -30,7 +30,7 @@ class JsonUtilsTest {
         String name = "n1";
         String image = "i1";
         User user = new User(userId, name, image);
-        String json = JsonUtils.writeToString(user);
+        String json = JsonUtils.toJson(user);
         assertNotNull(json);
         User jsonUser = JsonUtils.read(json, User.class);
         assertNotNull(jsonUser);
@@ -46,7 +46,7 @@ class JsonUtilsTest {
                 new User("u2", "n2", "i2"),
                 new User("u3", "n3", "i3")
         );
-        String json = JsonUtils.writeToString(users);
+        String json = JsonUtils.toJson(users);
         assertNotNull(json);
         List<User> jsons = JsonUtils.readAsList(json, User.class);
         assertEquals(3, jsons.size());

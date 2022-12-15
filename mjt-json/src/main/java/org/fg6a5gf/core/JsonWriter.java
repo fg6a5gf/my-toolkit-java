@@ -8,6 +8,6 @@ package org.fg6a5gf.core;
  */
 public interface JsonWriter {
 
-    String writeToString(Object obj);
+    String toJson(Object obj);
 
 }

@@ -4,9 +4,9 @@ package org.fg6a5gf.jackson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fg6a5gf.core.JsonReader;
-import org.fg6a5gf.exception.JsonDecodeException;
-import org.fg6a5gf.exception.JsonEncodeException;
 import org.fg6a5gf.core.JsonWriter;
+import org.fg6a5gf.exception.JsonReadException;
+import org.fg6a5gf.exception.JsonWriteException;
 
 import java.util.Collection;
 import java.util.function.Supplier;
@@ -30,28 +30,28 @@ public class JacksonJsonUtils implements JsonWriter, JsonReader {
         try {
             return objectMapper.readValue(str, tClass);
         } catch (JsonProcessingException e) {
-            throw new JsonDecodeException(e);
+            throw new JsonReadException(e);
         }
     }
 
     @Override
-    public <T> Collection<T> read(String str, Class<T> tclass, Supplier<Collection<T>> collectionFactory) {
+    public <T, C extends Collection<T>> C read(String str, Class<T> tclass, Supplier<C> collectionFactory) {
         try {
             return objectMapper.readValue(
                     str,
                     objectMapper.getTypeFactory().constructCollectionType(collectionFactory.get().getClass(), tclass)
             );
         } catch (JsonProcessingException e) {
-            throw new JsonDecodeException(e);
+            throw new JsonReadException(e);
         }
     }
 
     @Override
-    public String writeToString(Object obj) {
+    public String toJson(Object obj) {
         try {
             return objectMapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            throw new JsonEncodeException(e);
+            throw new JsonWriteException(e);
         }
     }
 }

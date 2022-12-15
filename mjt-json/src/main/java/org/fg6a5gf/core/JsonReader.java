@@ -13,5 +13,5 @@ public interface JsonReader {
 
     <T> T read(String str, Class<T> tClass);
 
-    <T> Collection<T> read(String str, Class<T> tclass, Supplier<Collection<T>> collectionFactory);
+    <T, C extends Collection<T>> C read(String str, Class<T> tclass, Supplier<C> collectionFactory);
 }
