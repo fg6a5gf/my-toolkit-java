@@ -1,0 +1,5 @@
+rootProject.name = 'my-java-toolkit'
+
+include 'mjt-json'
+include 'mjt-json-jackson-spring-boot-starter'
+
