@@ -14,27 +14,27 @@ public class JsonUtils {
     private JsonUtils() {
     }
 
-    private static JsonEncoder encoder;
+    private static JsonWriter writer;
 
-    private static JsonDecoder decoder;
+    private static JsonReader reader;
 
-    public static String encode(Object obj) {
-        return encoder.encode(obj);
+    public static String writeToString(Object obj) {
+        return writer.writeToString(obj);
     }
 
-    public static <T> T decode(String str, Class<T> tClass) {
-        return decoder.decode(str, tClass);
+    public static <T> T read(String str, Class<T> tClass) {
+        return reader.read(str, tClass);
     }
 
-    public static <T> Collection<T> decode(String str, Class<T> tclass, Supplier<Collection<T>> collectionFactory) {
+    public static <T> Collection<T> read(String str, Class<T> tclass, Supplier<Collection<T>> collectionFactory) {
         if (str == null || str.length() == 0) {
             return List.of();
         }
-        return decoder.decode(str, tclass, collectionFactory);
+        return reader.read(str, tclass, collectionFactory);
     }
 
-    public static <T> List<T> decodeList(String str, Class<T> tClass) {
-        return (List<T>) decode(str, tClass, (Supplier<Collection<T>>) ArrayList::new);
+    public static <T> List<T> readAsList(String str, Class<T> tClass) {
+        return (List<T>) read(str, tClass, (Supplier<Collection<T>>) ArrayList::new);
     }
 
     public static class Config {
@@ -46,21 +46,21 @@ public class JsonUtils {
          * 清空已经配置好的内容
          */
         public static void reset() {
-            JsonUtils.encoder = null;
-            JsonUtils.decoder = null;
+            JsonUtils.writer = null;
+            JsonUtils.reader = null;
         }
 
-        public static boolean configEncoder(JsonEncoder jsonEncoder) {
-            if (JsonUtils.encoder == null) {
-                JsonUtils.encoder = jsonEncoder;
+        public static boolean configEncoder(JsonWriter jsonEncoder) {
+            if (JsonUtils.writer == null) {
+                JsonUtils.writer = jsonEncoder;
                 return true;
             }
             return false;
         }
 
-        public static boolean configDecoder(JsonDecoder jsonDecoder) {
-            if (JsonUtils.decoder == null) {
-                JsonUtils.decoder = jsonDecoder;
+        public static boolean configDecoder(JsonReader jsonDecoder) {
+            if (JsonUtils.reader == null) {
+                JsonUtils.reader = jsonDecoder;
                 return true;
             }
             return false;

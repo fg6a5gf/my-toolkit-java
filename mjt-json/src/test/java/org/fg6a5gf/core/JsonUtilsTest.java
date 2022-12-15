@@ -1,13 +1,14 @@
-package org.fg6a5gf.jackson;
+package org.fg6a5gf.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.fg6a5gf.core.JsonUtils;
+import org.fg6a5gf.jackson.JacksonJsonUtilsConfig;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * JsonUtilsTest
@@ -25,13 +26,13 @@ class JsonUtilsTest {
 
     @Test
     void testObj() {
-        String userId = "iphoneceshi6@163.com";
-        String name = "测试账号";
-        String image = "https://oimagec6.ydstatic.com/image?id=-4541055657611236390&product=bisheng";
+        String userId = "u1";
+        String name = "n1";
+        String image = "i1";
         User user = new User(userId, name, image);
-        String json = JsonUtils.encode(user);
+        String json = JsonUtils.writeToString(user);
         assertNotNull(json);
-        User jsonUser = JsonUtils.decode(json, User.class);
+        User jsonUser = JsonUtils.read(json, User.class);
         assertNotNull(jsonUser);
         assertEquals(userId, jsonUser.userId);
         assertEquals(name, jsonUser.name);
@@ -45,9 +46,9 @@ class JsonUtilsTest {
                 new User("u2", "n2", "i2"),
                 new User("u3", "n3", "i3")
         );
-        String json = JsonUtils.encode(users);
+        String json = JsonUtils.writeToString(users);
         assertNotNull(json);
-        List<User> jsons = JsonUtils.decodeList(json, User.class);
+        List<User> jsons = JsonUtils.readAsList(json, User.class);
         assertEquals(3, jsons.size());
         assertEquals("u3", jsons.get(2).userId);
         assertEquals("n3", jsons.get(2).name);

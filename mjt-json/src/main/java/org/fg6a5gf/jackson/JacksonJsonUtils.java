@@ -3,10 +3,10 @@ package org.fg6a5gf.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.fg6a5gf.core.JsonReader;
 import org.fg6a5gf.exception.JsonDecodeException;
-import org.fg6a5gf.core.JsonDecoder;
 import org.fg6a5gf.exception.JsonEncodeException;
-import org.fg6a5gf.core.JsonEncoder;
+import org.fg6a5gf.core.JsonWriter;
 
 import java.util.Collection;
 import java.util.function.Supplier;
@@ -17,7 +17,7 @@ import java.util.function.Supplier;
  * @author zhengxx
  * @since 2022/12/07
  */
-public class JacksonJsonUtils implements JsonEncoder, JsonDecoder {
+public class JacksonJsonUtils implements JsonWriter, JsonReader {
 
     private final ObjectMapper objectMapper;
 
@@ -26,7 +26,7 @@ public class JacksonJsonUtils implements JsonEncoder, JsonDecoder {
     }
 
     @Override
-    public <T> T decode(String str, Class<T> tClass) {
+    public <T> T read(String str, Class<T> tClass) {
         try {
             return objectMapper.readValue(str, tClass);
         } catch (JsonProcessingException e) {
@@ -35,7 +35,7 @@ public class JacksonJsonUtils implements JsonEncoder, JsonDecoder {
     }
 
     @Override
-    public <T> Collection<T> decode(String str, Class<T> tclass, Supplier<Collection<T>> collectionFactory) {
+    public <T> Collection<T> read(String str, Class<T> tclass, Supplier<Collection<T>> collectionFactory) {
         try {
             return objectMapper.readValue(
                     str,
@@ -47,7 +47,7 @@ public class JacksonJsonUtils implements JsonEncoder, JsonDecoder {
     }
 
     @Override
-    public String encode(Object obj) {
+    public String writeToString(Object obj) {
         try {
             return objectMapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {

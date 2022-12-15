@@ -1,13 +1,13 @@
 package org.fg6a5gf.core;
 
 /**
- * JsonEncoder
+ * JsonWriter
  *
  * @author zhengxx
  * @since 2022/12/07
  */
-public interface JsonEncoder {
+public interface JsonWriter {
 
-    String encode(Object obj);
+    String writeToString(Object obj);
 
 }
